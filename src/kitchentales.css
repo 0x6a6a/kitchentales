@@ -1,3 +1,12 @@
 .impress-supported .fallback-message {
 	display: none;
 }
+
+.clip-circle {
+	clip-path: circle(25%);
+	transition: clip-path 1s;
+}
+
+.present .clip-circle {
+	clip-path: circle(100%);
+}
