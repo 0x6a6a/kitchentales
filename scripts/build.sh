@@ -5,4 +5,4 @@ outdir='dist'
 
 mkdir -p "$outdir"
 ./scripts/build-hls.sh
-cp -av src/index.html "$outdir"
+cp -av src/index.html src/kitchentales.css "$outdir"
