@@ -1,0 +1,46 @@
+name: Auto Deploy
+
+on:
+  push:
+    paths:
+      - 'assets/**'
+      - 'scripts/**'
+      - 'src/**'
+
+jobs:
+
+  build_deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Update APT
+        run: sudo apt update
+
+      - name: Cache HLS
+        id: cache-hls
+        uses: actions/cache@v2
+        with:
+          path: ./dist/hls
+          key: hls-${{ hashFiles('assets/videos/**', 'scripts/build-hls.sh') }}
+
+      - name: Install ffmpeg
+        if: steps.cache-hls.outputs.cache-hit != 'true'
+        run: sudo apt install -y ffmpeg
+
+      - name: Build static site
+        run: ./scripts/build.sh
+
+      - name: Install rclone
+        run: sudo apt install -y rclone
+
+      - name: Deploy static site
+        env:
+          RCLONE_WEBDAV_URL:  ${{ secrets.WEBDAV_URL }}
+          RCLONE_WEBDAV_USER: ${{ secrets.WEBDAV_USER }}
+          RCLONE_WEBDAV_PASS: ${{ secrets.WEBDAV_PASS }}
+        run: ./scripts/deploy.sh
