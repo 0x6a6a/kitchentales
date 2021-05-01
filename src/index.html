@@ -18,12 +18,22 @@
 		data-width="1920" data-height="1080"
 		data-max-scale="3">
 
-		<div id="start" class="step">
+		<div id="bg" class="step">
 		</div>
 
-		<div id="pfanne-sahne3full" class="step" data-rotate-x="-40" data-rotate-y="10">
-			<video-js id="video-pfanne-sahne3full" class="video-js clip-circle" preload="auto" autoplay controls loop data-setup="{}">
+		<div id="start" class="step" data-x="-711" data-y="-438" data-scale="0.25" data-rotate="4">
+			<h1>kitchen<br />tales</h1>
+		</div>
+
+		<div id="pfanne-sahne3full" class="step" data-x="-803" data-y="20" data-scale="0.10" data-rotate="-15">
+			<video-js id="video-pfanne-sahne3full" class="video-js clip-circle" preload="auto" autoplay controls loop muted data-setup="{fluid:true}">
 				<source src="hls/kitchen-pfanne-sahne3full/main.m3u8" type="application/vnd.apple.mpegurl" />
+			</video-js>
+		</div>
+
+		<div id="waschmaschine-rot-in-weisz3" class="step" data-x="682" data-y="299" data-scale="0.1" data-rotate="27">
+			<video-js id="video-waschmaschine-rot-in-weisz3" class="video-js clip-circle" preload="auto" autoplay controls loop muted data-setup="{fluid:true}">
+				<source src="hls/kitchen-waschmaschine-rot-in-weisz3/main.m3u8" type="application/vnd.apple.mpegurl" />
 			</video-js>
 		</div>
 	</div>

@@ -2,6 +2,24 @@
 	display: none;
 }
 
+
+
+.impress-enabled .step {
+	width: 1920px;
+	height: 1080px;
+	background: rgba(200, 200, 200, 0.3);
+	font-size: 120px;
+}
+
+
+
+.impress-enabled .video-js {
+	width: 100%;
+	height: 100%;
+}
+
+
+
 .clip-circle {
 	clip-path: circle(25%);
 	transition: clip-path 1s;
@@ -9,4 +27,11 @@
 
 .present .clip-circle {
 	clip-path: circle(100%);
+}
+
+
+
+#bg {
+	background-image: url("background.jpg");
+	background-size: cover;
 }
