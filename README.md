@@ -24,7 +24,7 @@ Do note that you’ll have to run `scripts/build.sh` after changing the source f
 If that’s too tedious for you, you can create symlinks to the required files like this:
 
 ```sh
-ln -sf ../src/{background.jpg,index.html,kitchentales.css,kitchentales.js} dist
+ln -sf ../src/{index.html,kitchentales.css,kitchentales.js} ../assets/background.jpg dist
 ```
 
 ## Adding/removing/repositioning videos
