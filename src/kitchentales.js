@@ -44,8 +44,22 @@ const kitchentales = (function () {
 		afterEl.parentNode.insertBefore(makeVideoSlide(o), afterEl.nextSibling);
 	}
 
+	function initImpress() {
+		let i;
+		try {
+			i = impress();
+		} catch { /* ignore */ }
+		if (document.body.classList.contains("impress-not-supported")) {
+			document.body.classList.add("impress-really-not-supported");
+			return;
+		}
+		document.getElementById("meta-viewport").setAttribute("value", "width=" + WIDTH);
+		i.init();
+	}
+
 	return {
 		appendVideoSlideAfter,
+		initImpress,
 		makeVideoSlide,
 	};
 })();
