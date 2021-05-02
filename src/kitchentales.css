@@ -129,6 +129,27 @@ p {
 	display: block;
 }
 
+#start button {
+	display: none;
+	font-size: 150%;
+	background: rgba(200, 200, 200, 0.5);
+	color: #000;
+	border-radius: 0.1em;
+	border: none;
+	padding: 0.1em 0.5em;
+	cursor: pointer;
+	transition: 0.5s color, 0.2s background;
+}
+#start button:hover {
+	color: #ddd;
+}
+#start button:active {
+	background: rgba(50, 50, 50, 0.8);
+}
+.no-nav #start button {
+	display: inherit;
+}
+
 
 
 .impress-enabled .step {

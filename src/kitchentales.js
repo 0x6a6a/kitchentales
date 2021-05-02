@@ -44,6 +44,16 @@ const kitchentales = (function () {
 		afterEl.parentNode.insertBefore(makeVideoSlide(o), afterEl.nextSibling);
 	}
 
+	function go(ev) {
+		// Stop propagation because else this bubbles up to impress's main click handler
+		// which would instantly reactivate the slide with the button in it.
+		ev.stopPropagation();
+
+		// Allow navigation again and go to an overview.
+		document.body.classList.remove("no-nav");
+		impress().goto("bg");
+	}
+
 	function impressNoNav(ev) {
 		if (document.body.classList.contains("no-nav")) {
 			return false;
@@ -62,6 +72,7 @@ const kitchentales = (function () {
 		document.getElementById("meta-viewport").setAttribute("value", "width=" + WIDTH);
 		i.init();
 		impress.addPreStepLeavePlugin(impressNoNav);
+		document.getElementById("go").addEventListener("click", go);
 
 		// Make sure we start on "start", no matter the #fragment in the URL.
 		i.goto("start");
@@ -70,6 +81,7 @@ const kitchentales = (function () {
 
 	return {
 		appendVideoSlideAfter,
+		go,
 		init,
 		makeVideoSlide,
 	};
