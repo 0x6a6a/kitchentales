@@ -44,7 +44,13 @@ const kitchentales = (function () {
 		afterEl.parentNode.insertBefore(makeVideoSlide(o), afterEl.nextSibling);
 	}
 
-	function initImpress() {
+	function impressNoNav(ev) {
+		if (document.body.classList.contains("no-nav")) {
+			return false;
+		}
+	}
+
+	function init() {
 		let i;
 		try {
 			i = impress();
@@ -55,11 +61,16 @@ const kitchentales = (function () {
 		}
 		document.getElementById("meta-viewport").setAttribute("value", "width=" + WIDTH);
 		i.init();
+		impress.addPreStepLeavePlugin(impressNoNav);
+
+		// Make sure we start on "start", no matter the #fragment in the URL.
+		i.goto("start");
+		document.body.classList.add("no-nav");
 	}
 
 	return {
 		appendVideoSlideAfter,
-		initImpress,
+		init,
 		makeVideoSlide,
 	};
 })();
