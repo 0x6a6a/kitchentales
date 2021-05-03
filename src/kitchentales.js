@@ -44,11 +44,18 @@ const kitchentales = (function () {
 		afterEl.parentNode.insertBefore(makeVideoSlide(o), afterEl.nextSibling);
 	}
 
+	function allVideos(method, ...args) {
+		for (player of Object.values(videojs.getPlayers())) {
+			player[method].apply(player, args);
+		}
+	}
+
 	function go(ev) {
 		// Stop propagation because else this bubbles up to impress's main click handler
 		// which would instantly reactivate the slide with the button in it.
 		ev.stopPropagation();
 
+		allVideos("muted", false);
 		// Allow navigation again and go to an overview.
 		document.body.classList.remove("no-nav");
 		impress().goto("bg");
@@ -80,6 +87,7 @@ const kitchentales = (function () {
 	}
 
 	return {
+		allVideos,
 		appendVideoSlideAfter,
 		go,
 		init,
