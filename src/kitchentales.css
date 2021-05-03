@@ -187,6 +187,10 @@ p {
 	clip-path: circle(960px) !important;
 }
 
+.step.is-video.active {
+	z-index: 1;
+}
+
 
 
 #bg {
