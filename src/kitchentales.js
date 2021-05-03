@@ -106,6 +106,7 @@ const kitchentales = (function () {
 		allVideos("muted", false);
 		// Allow navigation again and go to an overview.
 		document.body.classList.remove("no-nav");
+		document.body.classList.add("no-skip");
 		impress().goto("bg");
 	}
 
@@ -141,7 +142,12 @@ const kitchentales = (function () {
 	}
 
 	function impressNoNav(ev) {
+		// Disallow all navigation if no-nav is set on the body.
 		if (document.body.classList.contains("no-nav")) {
+			return false;
+		}
+		// Disallow navigating to steps tagged with "skip" if no-skip is set on the body.
+		if (document.body.classList.contains("no-skip") && ev && ev.detail && ev.detail.next && ev.detail.next.classList.contains("skip")) {
 			return false;
 		}
 	}
