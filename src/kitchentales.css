@@ -184,7 +184,7 @@ p {
 }
 
 .present .clip-circle, .present .clip-circle video {
-	clip-path: circle(100%) !important;
+	clip-path: circle(960px) !important;
 }
 
 
