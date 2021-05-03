@@ -1,5 +1,6 @@
 const kitchentales = (function () {
 	const [ WIDTH, HEIGHT ] = [ 1920, 1080 ];
+	const runningFades = {};
 	function makeVideoSlide(o) {
 		const slide = document.createElement("div");
 		slide.setAttribute("id", o.name);
@@ -61,19 +62,28 @@ const kitchentales = (function () {
 		if (typeof player === "string") {
 			player = videojs.getPlayer(player);
 		}
+		const playerName = player.id_;
 		let volume = player.volume()
 		const perInterval = (target - volume) / (millis / 50);
 		if (perInterval === 0) {
 			return;
 		}
 		const clamp = perInterval > 0 ? Math.min : Math.max;
+		if (playerName in runningFades) {
+			clearInterval(runningFades[playerName])
+			delete runningFades[playerName];
+		}
 		const interval = setInterval(function () {
 			volume = clamp(target, volume + perInterval);
 			player.volume(volume);
 			if (volume === target) {
 				clearInterval(interval);
+				if (runningFades[playerName] === interval) {
+					delete runningFades[playerName];
+				}
 			}
 		}, 50);
+		runningFades[playerName] = interval;
 	}
 
 	function go(ev) {
