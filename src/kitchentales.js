@@ -86,6 +86,15 @@ const kitchentales = (function () {
 		runningFades[playerName] = interval;
 	}
 
+	function soundFocus(step) {
+		if (step === null || step === undefined || step === false) {  // Play all sounds.
+			allVideos(fadeVolume, 0.5, 5000);
+		} else if (typeof step === "string") {  // Only play a specific video.
+			allVideos(fadeVolume, 0, 3000);
+			fadeVolume("video-" + step, 1, 1000);
+		}
+	}
+
 	function go(ev) {
 		// Stop propagation because else this bubbles up to impress's main click handler
 		// which would instantly reactivate the slide with the button in it.
@@ -93,10 +102,17 @@ const kitchentales = (function () {
 
 		allVideos("volume", 0);
 		allVideos("muted", false);
-		allVideos(fadeVolume, 1, 10000);
 		// Allow navigation again and go to an overview.
 		document.body.classList.remove("no-nav");
 		impress().goto("bg");
+	}
+
+	function onStepLeave(ev) {
+		// Do a sound focus on where we land next.
+		if (ev.detail && ev.detail.next) {
+			const stepName = ev.detail.next.id || "";
+			soundFocus(videojs.getPlayer("video-" + stepName) ? stepName : null);
+		}
 	}
 
 	function impressNoNav(ev) {
@@ -117,6 +133,7 @@ const kitchentales = (function () {
 		document.getElementById("meta-viewport").setAttribute("value", "width=" + WIDTH);
 		i.init();
 		impress.addPreStepLeavePlugin(impressNoNav);
+		document.getElementById("impress").addEventListener("impress:stepleave", onStepLeave);
 		document.getElementById("go").addEventListener("click", go);
 
 		// Make sure we start on "start", no matter the #fragment in the URL.
@@ -131,5 +148,6 @@ const kitchentales = (function () {
 		go,
 		init,
 		makeVideoSlide,
+		soundFocus,
 	};
 })();
