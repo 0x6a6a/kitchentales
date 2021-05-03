@@ -31,6 +31,7 @@ const kitchentales = (function () {
 			video.setAttribute(attr, val === true ? attr : val);
 		}
 		video.dataset.setup = "{}";
+		video.dataset.videoid = o.name;
 		if ("circle" in o) {
 			video.setAttribute("style", "clip-path: circle(" + (HEIGHT / 2 * o.circle) + "px);");
 		}
@@ -108,9 +109,13 @@ const kitchentales = (function () {
 		impress().goto("bg");
 	}
 
+	function activeVideo() {
+		const div = document.querySelector(".active.is-video");
+		return div ? div.id : null;
+	}
+
 	function isVideoActive() {
-		const active = document.querySelector(".active");
-		return (active && active.classList) ? active.classList.contains("is-video") : false;
+		return activeVideo() !== null;
 	}
 
 	function onStepLeave(ev) {
@@ -122,10 +127,17 @@ const kitchentales = (function () {
 	}
 
 	function onVideoClicked(ev) {
-		if (isVideoActive()) {
-			ev.stopPropagation();
+		if (ev && ev.target && ev.target.closest) {
+			const videodiv = ev.target.closest(".is-video");
+			if (videodiv.id !== activeVideo()) {
+				impress().goto(videodiv.id);
+			} else {
+				impress().goto("bg");
+			}
+		} else {
 			impress().goto("bg");
 		}
+		ev.stopPropagation();
 	}
 
 	function impressNoNav(ev) {
@@ -156,6 +168,7 @@ const kitchentales = (function () {
 	}
 
 	return {
+		activeVideo,
 		allVideos,
 		appendVideoSlideAfter,
 		fadeVolume,
