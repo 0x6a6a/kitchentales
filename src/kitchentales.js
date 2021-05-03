@@ -148,6 +148,7 @@ const kitchentales = (function () {
 		impress.addPreStepLeavePlugin(impressNoNav);
 		document.getElementById("impress").addEventListener("impress:stepleave", onStepLeave);
 		document.getElementById("go").addEventListener("click", go);
+		document.body.addEventListener("click", function () { impress().goto("bg"); });
 
 		// Make sure we start on "start", no matter the #fragment in the URL.
 		i.goto("start");
