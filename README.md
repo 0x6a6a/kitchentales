@@ -41,3 +41,5 @@ Each of the values are a set of options.
 * `x` and `y` set the 2D position, where `0, 0` is the top-left corner of the background image. This is somewhat different to the way _impress.js_ usually works (with `0, 0` being the _center_ of the view). We simply subtract half of the background’s width and height (defined in `kitchentales.js`) from the respective value. We’re doing this to allow us to read the coordinates by pointing at a pixel on the background image in Paint.
 * `circle` will cause the video to be clipped (masked) into a circle. The value is a number from 0 to 1 and specifies the circle’s radius as a fraction of the video height.
 * `after` is the DOM element ID the video should be inserted after.
+
+If you set the `hitboxes` class on the `<body>`, all impress.js “steps” will have a translucent white background so that you can see what their outline is.

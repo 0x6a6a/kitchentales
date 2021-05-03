@@ -64,6 +64,10 @@ p {
 	margin-bottom: 24px;
 }
 
+.pointer {
+	cursor: pointer;
+}
+
 
 
 @keyframes pulse {
@@ -155,8 +159,11 @@ p {
 .impress-enabled .step {
 	width: 1920px;
 	height: 1080px;
-	background: rgba(200, 200, 200, 0.3);
 	font-size: 5em;
+}
+
+.hitboxes.impress-enabled .step {
+	background: rgba(200, 200, 200, 0.3);
 }
 
 

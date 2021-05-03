@@ -3,7 +3,7 @@ const kitchentales = (function () {
 	function makeVideoSlide(o) {
 		const slide = document.createElement("div");
 		slide.setAttribute("id", o.name);
-		slide.setAttribute("class", "step");
+		slide.setAttribute("class", "step pointer");
 		[ "x", "y", "rotate", "scale" ].forEach(k => {
 			if (k in o) {
 				if (k === "x") {
