@@ -166,6 +166,10 @@ p {
 	line-height: 2.2em;
 }
 
+.impress-enabled .step.is-video {
+	width: 1080px;
+}
+
 .hitboxes.impress-enabled .step {
 	background: rgba(200, 200, 200, 0.3);
 }
@@ -173,8 +177,11 @@ p {
 
 
 .impress-enabled .video-js {
-	width: 100%;
-	height: 100%;
+	width: 1920px;
+	height: 1080px;
+	position: absolute;
+	top: 0;
+	left: -420px;
 }
 
 
