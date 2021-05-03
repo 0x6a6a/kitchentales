@@ -168,13 +168,12 @@ p {
 
 
 
-.clip-circle {
-	clip-path: circle(25%);
+.clip-circle, .clip-circle video {
 	transition: clip-path 1s;
 }
 
-.present .clip-circle {
-	clip-path: circle(100%);
+.present .clip-circle, .present .clip-circle video {
+	clip-path: circle(100%) !important;
 }
 
 

@@ -19,7 +19,7 @@ const kitchentales = (function () {
 		const video = document.createElement("video-js");
 		const videoAttrs = {
 			id: "video-" + o.name,
-			"class": "video-js clip-circle",
+			"class": "video-js" + ("circle" in o ? " clip-circle" : ""),
 			preload: "auto",
 			autoplay: true,
 			loop: true,
@@ -29,6 +29,9 @@ const kitchentales = (function () {
 			video.setAttribute(attr, val === true ? attr : val);
 		}
 		video.dataset.setup = "{}";
+		if ("circle" in o) {
+			video.setAttribute("style", "clip-path: circle(" + (HEIGHT / 2 * o.circle) + "px);");
+		}
 
 		const source = document.createElement("source");
 		source.setAttribute("src", "hls/kitchen-" + o.name + "/main.m3u8");
