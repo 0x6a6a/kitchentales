@@ -40,8 +40,11 @@
 	<script src="kitchentales.js"></script>
 	<script>
 		const videoDef = {
-			"pfanne-sahne3full": { x: 69, y: 464, scale: 0.1, rotate: -35, circle: 1, after: "start" },
-			"waschmaschine-rot-in-weisz3": { x: 1396, y: 818, scale: 0.17, rotate: 16, circle: 1, after: "pfanne-sahne3full" },
+			"pfanne-sahne3full": { x: 69, y: 464, scale: 0.12, rotate: -59, circle: 1, after: "start" },
+			"carotti-kocheli": { x: 197, y: 523, scale: 0.09, rotate: -29, circle: 1, after: "pfanne-sahne3full" },
+			"linsis-cook-laut_draw": { x: 317, y: 459, scale: 0.15, rotate: -35, circle: 1, portrait: true, after: "carotti-kocheli" },
+			"linse-rinse-durchgang3": { x: 1443, y: 376, scale: 0.15, rotate: 36, circle: 1, after: "linsis-cook-laut_draw" },
+			"waschmaschine-rot-in-weisz3": { x: 1396, y: 823, scale: 0.17, rotate: 16, circle: 1, after: "linse-rinse-durchgang3" },
 		};
 		for ([name, conf] of Object.entries(videoDef)) {
 			conf.name = name;
