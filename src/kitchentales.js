@@ -4,7 +4,7 @@ const kitchentales = (function () {
 	function makeVideoSlide(o) {
 		const slide = document.createElement("div");
 		slide.setAttribute("id", o.name);
-		slide.setAttribute("class", "step pointer");
+		slide.setAttribute("class", "step pointer is-video");
 		[ "x", "y", "rotate", "scale" ].forEach(k => {
 			if (k in o) {
 				if (k === "x") {
@@ -16,6 +16,7 @@ const kitchentales = (function () {
 				}
 			}
 		});
+		slide.addEventListener("click", onVideoClicked);
 
 		const video = document.createElement("video-js");
 		const videoAttrs = {
@@ -107,11 +108,23 @@ const kitchentales = (function () {
 		impress().goto("bg");
 	}
 
+	function isVideoActive() {
+		const active = document.querySelector(".active");
+		return (active && active.classList) ? active.classList.contains("is-video") : false;
+	}
+
 	function onStepLeave(ev) {
 		// Do a sound focus on where we land next.
 		if (ev.detail && ev.detail.next) {
 			const stepName = ev.detail.next.id || "";
 			soundFocus(videojs.getPlayer("video-" + stepName) ? stepName : null);
+		}
+	}
+
+	function onVideoClicked(ev) {
+		if (isVideoActive()) {
+			ev.stopPropagation();
+			impress().goto("bg");
 		}
 	}
 
@@ -147,6 +160,7 @@ const kitchentales = (function () {
 		fadeVolume,
 		go,
 		init,
+		isVideoActive,
 		makeVideoSlide,
 		soundFocus,
 	};
