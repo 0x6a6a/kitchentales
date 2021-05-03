@@ -46,8 +46,31 @@ const kitchentales = (function () {
 
 	function allVideos(method, ...args) {
 		for (player of Object.values(videojs.getPlayers())) {
-			player[method].apply(player, args);
+			if (typeof method === "string") {
+				player[method].apply(player, args);
+			} else {
+				method(player, ...args);
+			}
 		}
+	}
+
+	function fadeVolume(player, target, millis) {
+		if (typeof player === "string") {
+			player = videojs.getPlayer(player);
+		}
+		let volume = player.volume()
+		const perInterval = (target - volume) / (millis / 50);
+		if (perInterval === 0) {
+			return;
+		}
+		const clamp = perInterval > 0 ? Math.min : Math.max;
+		const interval = setInterval(function () {
+			volume = clamp(target, volume + perInterval);
+			player.volume(volume);
+			if (volume === target) {
+				clearInterval(interval);
+			}
+		}, 50);
 	}
 
 	function go(ev) {
@@ -55,7 +78,9 @@ const kitchentales = (function () {
 		// which would instantly reactivate the slide with the button in it.
 		ev.stopPropagation();
 
+		allVideos("volume", 0);
 		allVideos("muted", false);
+		allVideos(fadeVolume, 1, 10000);
 		// Allow navigation again and go to an overview.
 		document.body.classList.remove("no-nav");
 		impress().goto("bg");
@@ -89,6 +114,7 @@ const kitchentales = (function () {
 	return {
 		allVideos,
 		appendVideoSlideAfter,
+		fadeVolume,
 		go,
 		init,
 		makeVideoSlide,
