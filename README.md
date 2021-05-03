@@ -6,13 +6,14 @@ It’s a website with some videos.
 ## Architecture
 
 _kitchen tales_ is a static website based on [impress.js](https://impress.js.org/).
-It’s using [ffmpeg](https://ffmpeg.org/) to split the embedded videos into [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) segments before deployment, and [Video.js](https://videojs.com/) for cross-browser playback of these videos.
+It’s using [ImageMagick](https://imagemagick.org/) for image conversion, [ffmpeg](https://ffmpeg.org/) to split the embedded videos into [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) segments before deployment, and [Video.js](https://videojs.com/) for cross-browser playback of these videos.
 
 JavaScript dependencies are fetched from the unpkg CDN.
 At some point we might serve them locally, but not yet.
 
 ## Setting up
 
+* Make sure you have the necessary tools installed: `ffmpeg`, `imagemagick` and `webp`.
 * Clone the repo.
 * Run `scripts/build.sh` to create the `dist` folder that contains the HTML, CSS and JavaScript from the `src` directory (as of yet, unminified). It will also automatically call `scripts/build-hls.sh` for converting the videos from `assets/videos` to HLS segments.
 * Throw the contents of `dist` onto some webserver. Right now, we use `scripts/deploy.sh` to [rclone](https://rclone.org/)-sync them via WebDAV to [kitchentales.space](https://kitchentales.space/).
@@ -21,10 +22,10 @@ At some point we might serve them locally, but not yet.
 For local development, run any kind of webserver in `dist`.
 For example, if you have Python installed, you may use something like `python3 -m http.server 8080` and then access the site at <http://localhost:8080/>.
 Do note that you’ll have to run `scripts/build.sh` after changing the source files.
-If that’s too tedious for you, you can create symlinks to the required files like this:
+If that’s too tedious for you, you can create symlinks to the required files like this (after having built the site once):
 
 ```sh
-ln -sf ../src/{index.html,kitchentales.css,kitchentales.js} ../assets/background.jpg dist
+ln -sf ../src/{index.html,kitchentales.css,kitchentales.js} dist
 ```
 
 ## Adding/removing/repositioning videos

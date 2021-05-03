@@ -5,4 +5,5 @@ outdir='dist'
 
 mkdir -p "$outdir"
 ./scripts/build-hls.sh
-cp -av assets/background.jpg src/index.html src/kitchentales.css src/kitchentales.js "$outdir"
+convert assets/background.webp -colorspace Gray -resize 1920x1080 -quality 75 "$outdir/background.jpg"
+cp -av src/index.html src/kitchentales.css src/kitchentales.js "$outdir"
