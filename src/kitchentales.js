@@ -104,7 +104,7 @@ const kitchentales = (function () {
 		allVideos("muted", false);
 		// Allow navigation again and go to an overview.
 		document.body.classList.remove("no-nav");
-		impress().goto("bg");
+		impress().goto("overview");
 	}
 
 	function onStepLeave(ev) {
