@@ -12,4 +12,4 @@ done
 [ -n "$missing_vars" ] && exit 1
 
 cd dist
-rclone sync . :ftp:kitchentales
+rclone sync . :ftp:
