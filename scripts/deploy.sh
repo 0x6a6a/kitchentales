@@ -2,7 +2,7 @@
 set -e
 
 missing_vars=''
-for var in URL USER PASS; do
+for var in HOST USER PASS; do
 	full="RCLONE_FTP_$var"
 	if eval [ -z \"\$$full\" ]; then
 		printf 'Please set the %s environment variable.\n' "$full" >&2
