@@ -43,7 +43,7 @@ jobs:
 
       - name: Deploy static site
         env:
-          RCLONE_WEBDAV_URL:  ${{ secrets.WEBDAV_URL }}
-          RCLONE_WEBDAV_USER: ${{ secrets.WEBDAV_USER }}
-          RCLONE_WEBDAV_PASS: ${{ secrets.WEBDAV_PASS }}
+          RCLONE_FTP_URL:  ${{ secrets.DEPLOY_URL }}
+          RCLONE_FTP_USER: ${{ secrets.DEPLOY_USER }}
+          RCLONE_FTP_PASS: ${{ secrets.DEPLOY_PASS }}
         run: ./scripts/deploy.sh
