@@ -35,8 +35,8 @@ jobs:
         if: steps.cache-hls.outputs.cache-hit != 'true'
         run: sudo apt install -y ffmpeg
 
-      - name: Install rclone and image conversion
-        run: sudo apt install -y rclone webp
+      - name: Install rclone and image conversion (x2)
+        run: sudo apt install -y imagemagick rclone webp
 
       - name: Build static site
         run: ./scripts/build.sh
