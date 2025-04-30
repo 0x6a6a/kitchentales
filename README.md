@@ -16,7 +16,7 @@ At some point we might serve them locally, but not yet.
 * Make sure you have the necessary tools installed: `ffmpeg`, `imagemagick` and `webp`.
 * Clone the repo.
 * Run `scripts/build.sh` to create the `dist` folder that contains the HTML, CSS and JavaScript from the `src` directory (as of yet, unminified). It will also automatically call `scripts/build-hls.sh` for converting the videos from `assets/videos` to HLS segments.
-* Throw the contents of `dist` onto some webserver. Right now, we use `scripts/deploy.sh` to [rclone](https://rclone.org/)-sync them via WebDAV to [kitchentales.space](https://kitchentales.space/).
+* Throw the contents of `dist` onto some webserver. Right now, we use `scripts/deploy.sh` to [rclone](https://rclone.org/)-sync them via WebDAV to [jj.cyou/kitchentales](https://jj.cyou/kitchentales/).
 * There’s [a GitHub Actions workflow](.github/workflows/auto-deploy.yaml) that automates all of that on push.
 
 For local development, run any kind of webserver in `dist`.
